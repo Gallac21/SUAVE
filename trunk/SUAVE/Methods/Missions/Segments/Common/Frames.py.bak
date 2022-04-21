@@ -181,6 +181,8 @@ def update_planet_position(segment):
                                 
     """      
 
+    # Here we need to replace V with the ground speed - unpack wind velocity vector
+    
     # unpack
     conditions = segment.state.conditions
     
@@ -404,6 +406,9 @@ def integrate_inertial_horizontal_position(segment):
         N/A
                                 
     """        
+    
+    # Here we need to replace vx with ground speed - unpack wind velocity vector and calculate ground speed
+    # Need to find true heading and update w.r.t wind velocity
 
     conditions = segment.state.conditions
     b          = segment.true_course

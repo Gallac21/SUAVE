@@ -64,4 +64,3 @@ def initialize_conditions(segment):
     segment.state.conditions.frames.inertial.velocity_vector[:,0] = air_speed
     segment.state.conditions.frames.inertial.time[:,0]            = time[:,0]
     segment.state.conditions.frames.wind.wind_velocity_vector[:,0]= -wind_speed # positive x in wind frame points away from aircraft
-    

@@ -122,10 +122,10 @@ def update_freestream(segment):
     
     # unpack
     conditions = segment.state.conditions
-    Vvec = conditions.frames.inertial.velocity_vector
-    rho  = conditions.freestream.density
-    a    = conditions.freestream.speed_of_sound
-    mu   = conditions.freestream.dynamic_viscosity
+    Vvec    = conditions.frames.inertial.velocity_vector
+    rho     = conditions.freestream.density
+    a       = conditions.freestream.speed_of_sound
+    mu      = conditions.freestream.dynamic_viscosity
     
     # velocity magnitude
     Vmag2 = np.sum( Vvec**2, axis=1)[:,None] # keep 2d column vector

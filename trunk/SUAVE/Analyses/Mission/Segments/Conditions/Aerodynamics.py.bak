@@ -65,7 +65,6 @@ class Aerodynamics(Basic):
         self.frames.wind = Conditions()
         self.frames.wind.body_rotations        = ones_3col * 0 # rotations in [X,Y,Z] -> [phi,theta,psi]
         self.frames.wind.velocity_vector       = ones_3col * 0
-        self.frames.wind.wind_velocity_vector  = ones_3col * 0
         self.frames.wind.lift_force_vector     = ones_3col * 0
         self.frames.wind.drag_force_vector     = ones_3col * 0
         self.frames.wind.transform_to_inertial = np.empty([0,0,0])
