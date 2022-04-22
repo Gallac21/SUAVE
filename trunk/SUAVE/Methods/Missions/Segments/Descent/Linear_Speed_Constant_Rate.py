@@ -1,8 +1,7 @@
 ## @ingroup Methods-Missions-Segments-Descent
 # Linear_Speed_Constant_Rate.py
 # 
-# Created:  Jul 2014, SUAVE Team
-# Modified: Jan 2016, E. Botero
+# Created:  Apr 2022, C. Gallagher
 
 # ----------------------------------------------------------------------
 #  Imports
