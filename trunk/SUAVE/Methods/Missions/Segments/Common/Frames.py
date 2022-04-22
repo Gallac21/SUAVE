@@ -5,6 +5,7 @@
 # Modified: Jul 2016, E. Botero
 #           Jul 2017, E. Botero
 #           May 2019, T. MacDonald
+#           Apr 2022, C. Gallagher
 
 # ----------------------------------------------------------------------
 #  Imports
@@ -167,6 +168,7 @@ def update_planet_position(segment):
         segment.state.conditions:
             freestream.velocity                      [meters/second]
             freestream.altitude                      [meters]
+            frames.wind.wind_velocity_vector         [meters/second]
             frames.body.inertial_rotations           [Radians]
         segment.analyses.planet.features.mean_radius [meters]
         segment.state.numerics.time.integrate        [float]
@@ -195,16 +197,16 @@ def update_planet_position(segment):
     Re         = segment.analyses.planet.features.mean_radius
     
     # Ground speed with wind velocity
-    V         = V - Vwind
+    V_ground   = V + Vwind
 
     # The flight path and radius
     gamma     = theta - alpha
     R         = altitude + Re
 
     # Find the velocities and integrate the positions
-    lamdadot  = (V/R)*np.cos(gamma)*np.cos(psi)
+    lamdadot  = (V_ground/R)*np.cos(gamma)*np.cos(psi)
     lamda     = np.dot(I,lamdadot) / Units.deg # Latitude
-    mudot     = (V/R)*np.cos(gamma)*np.sin(psi)/np.cos(lamda)
+    mudot     = (V_ground/R)*np.cos(gamma)*np.sin(psi)/np.cos(lamda)
     mu        = np.dot(I,mudot) / Units.deg # Longitude
 
     # Reshape the size of the vectorss
@@ -394,6 +396,7 @@ def integrate_inertial_horizontal_position(segment):
             segment.state.conditions:
                 frames.inertial.position_vector [meters]
                 frames.inertial.velocity_vector [meters/second]
+                frames.wind.wind_velocity_vector [meters/second]
             segment.state.numerics.time.integrate       [float]
             
         Outputs:
@@ -415,12 +418,8 @@ def integrate_inertial_horizontal_position(segment):
     I          = segment.state.numerics.time.integrate  
     trajectory = np.repeat( np.atleast_2d(np.array([np.cos(b),np.sin(b)])),cpts , axis = 0)
     
-    # Wind-to-inertial
-    T_wind2inertial = conditions.frames.wind.transform_to_inertial
-    
-    # Subtract wind velocity
-    vw_inertial = orientation_product(T_wind2inertial,vw)
-    vx_ground   = vx - vw_inertial
+    # Ground Speed - headwind negative, tailwind positive
+    vx_ground   = vx + vw
     
     # integrate
     x = np.dot(I,vx_ground)  

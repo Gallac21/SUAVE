@@ -15,7 +15,7 @@ def initialize_conditions(segment):
 
     Assumptions:
     Constant speed and constant altitude
-    Positive wind speed for headwind, negative for tailwind
+    Wind speed negative for headwind, positive for tailwind
 
     Source:
     N/A
@@ -50,7 +50,7 @@ def initialize_conditions(segment):
         alt = -1.0 * segment.state.initials.conditions.frames.inertial.position_vector[-1,2]
         
     # Assign ground speed
-    ground_speed = air_speed - wind_speed
+    ground_speed = air_speed + wind_speed
     
     # dimensionalize time
     t_initial = conditions.frames.inertial.time[0,0]
@@ -63,5 +63,5 @@ def initialize_conditions(segment):
     segment.state.conditions.frames.inertial.position_vector[:,2] = -alt # z points down
     segment.state.conditions.frames.inertial.velocity_vector[:,0] = air_speed
     segment.state.conditions.frames.inertial.time[:,0]            = time[:,0]
-    segment.state.conditions.frames.wind.wind_velocity_vector[:,0]= -wind_speed # positive x in wind frame points away from aircraft
+    segment.state.conditions.frames.wind.wind_velocity_vector[:,0]= wind_speed 
     

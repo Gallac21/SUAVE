@@ -50,7 +50,7 @@ def initialize_conditions(segment):
         alt = -1.0 * segment.state.initials.conditions.frames.inertial.position_vector[-1,2]
         
     # Assign ground speed
-	ground_speed = air_speed - wind_speed
+    ground_speed = air_speed - wind_speed
     
     # dimensionalize time
     t_initial = conditions.frames.inertial.time[0,0]
