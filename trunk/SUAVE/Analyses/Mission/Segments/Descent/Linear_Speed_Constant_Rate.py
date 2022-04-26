@@ -58,6 +58,7 @@ class Linear_Speed_Constant_Rate(Unknown_Throttle):
         self.descent_rate    = 3.  * Units.m / Units.s
         self.air_speed_start = 200 * Units.m / Units.s
         self.air_speed_end   = 100 * Units.m / Units.s
+        self.wind_speed      = 0.0 * Units.m / Units.s
         self.true_course     = 0.0 * Units.degrees    
         
         # --------------------------------------------------------------

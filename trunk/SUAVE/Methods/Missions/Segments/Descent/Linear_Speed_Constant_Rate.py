@@ -45,6 +45,7 @@ def initialize_conditions(segment):
     descent_rate = segment.descent_rate
     Vo           = segment.air_speed_start
     Vf           = segment.air_speed_end
+    Vw           = segment.wind_speed
     alt0         = segment.altitude_start 
     altf         = segment.altitude_end
     t_nondim     = segment.state.numerics.dimensionless.control_points
@@ -68,3 +69,4 @@ def initialize_conditions(segment):
     conditions.frames.inertial.velocity_vector[:,2] = v_z
     conditions.frames.inertial.position_vector[:,2] = -alt[:,0] # z points down
     conditions.freestream.altitude[:,0]             =  alt[:,0] # positive altitude in this context
+    conditions.frames.wind.wind_velocity_vector[:,0]= Vw

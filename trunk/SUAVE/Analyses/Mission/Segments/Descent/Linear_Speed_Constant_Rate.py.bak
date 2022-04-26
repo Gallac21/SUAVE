@@ -64,7 +64,7 @@ class Linear_Speed_Constant_Rate(Unknown_Throttle):
         #   The Solving Process
         # --------------------------------------------------------------
         initialize = self.process.initialize
-        initialize.conditions = Methods.Climb.Linear_Speed_Constant_Rate.initialize_conditions
+        initialize.conditions = Methods.Descent.Linear_Speed_Constant_Rate.initialize_conditions
 
         
 
